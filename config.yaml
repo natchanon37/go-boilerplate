@@ -1,0 +1,18 @@
+server:
+  host: 127.0.0.1
+  port: "9005"
+
+inbound_itmx:
+  host: "localhost:9092,localhost:9093,localhost:9094"
+  user: "user"
+  pass: "password"
+  aws_access_key: ""
+  aws_secret_key: ""
+  aws_role: ""
+  aws_region: "ap-southeast-1"
+  sasl_mechanism: "sha512"
+  auto_offset_reset: "newest"
+  inbound_itmx_topic: "itmx"
+  inbound_itmx_group_id: "itmx_group"
+  version: "3.4.0"
+  max_retries: "3"
