@@ -2,9 +2,10 @@ package main
 
 import (
 	"go-boilerplate/configs"
+	"go-boilerplate/internal/controller/routes"
+	"go-boilerplate/internal/kafka"
 	"go-boilerplate/pkg/http"
-	"go-boilerplate/routes"
-	"go-boilerplate/utils"
+	"go-boilerplate/pkg/utils"
 )
 
 func main() {
@@ -24,4 +25,8 @@ func main() {
 		}
 	}()
 
+	// set up worker
+
+	worker := kafka.NewWorkerA(configs.Configs.WorkerAConsumer)
+	worker.Start()
 }

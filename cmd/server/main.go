@@ -2,9 +2,9 @@ package main
 
 import (
 	"go-boilerplate/configs"
+	"go-boilerplate/internal/controller/routes"
 	"go-boilerplate/pkg/http"
-	"go-boilerplate/routes"
-	"go-boilerplate/utils"
+	"go-boilerplate/pkg/utils"
 )
 
 func main() {

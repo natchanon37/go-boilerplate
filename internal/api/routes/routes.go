@@ -1,18 +1,18 @@
 package routes
 
 import (
-	health_handler "go-boilerplate/handlers/health"
+	health_controller "go-boilerplate/internal/api/controller/health"
 	"go-boilerplate/pkg/http"
 )
 
 func InitialWorker(route http.Router) {
-	healthCtrl := health_handler.NewHealthCtrl()
+	healthCtrl := health_controller.NewHealthCtrl()
 
 	route.GET("/health", healthCtrl.Health)
 }
 
 func InitialServer(route http.Router) {
-	healthCtrl := health_handler.NewHealthCtrl()
+	healthCtrl := health_controller.NewHealthCtrl()
 
 	route.GET("/health", healthCtrl.Health)
 }
