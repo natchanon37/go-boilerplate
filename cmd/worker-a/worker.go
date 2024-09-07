@@ -5,7 +5,7 @@ import (
 
 	"go-boilerplate/internal/api/routes"
 	"go-boilerplate/internal/kafka"
-	"go-boilerplate/pkg/http"
+	"go-boilerplate/pkg/httpserver"
 	"go-boilerplate/pkg/utils"
 )
 
@@ -14,7 +14,7 @@ func main() {
 	configs.LoadConfigs(&configs.Configs)
 
 	// init gin router
-	router := http.NewRouter(true, nil)
+	router := httpserver.NewRouter(true)
 
 	// set up routes
 	routes.InitialWorkerRoutes(router, nil, nil)
@@ -22,7 +22,7 @@ func main() {
 	// Start rest server
 	host := configs.Configs.Server.Host
 	port := utils.StringToInt(configs.Configs.Server.Port)
-	server := http.NewRestAPI(host, port, router)
+	server := httpserver.NewRestAPI(host, port, router)
 	go func() {
 		if err := server.Start(); err != nil {
 			panic("Failed to start http server: " + err.Error())
