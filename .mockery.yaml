@@ -1,0 +1,11 @@
+with-expecter: true
+all: true
+dir: "mocks"
+outpkg: "mocks"
+filename: "{{ .InterfaceName | snakecase }}.go"
+mockname: "mock_{{.InterfaceName}}"
+packages:
+  github.com/natchanon37/go-boilerplate:
+    config:
+      recursive: true
+      exclude: [controllers]

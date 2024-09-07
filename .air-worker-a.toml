@@ -4,8 +4,8 @@ tmp_dir = "tmp"
 
 [build]
   args_bin = ["server"]
-  bin = "./tmp/worker-a/main"
-  cmd = "go mod tidy && go mod download && go build -o ./tmp/worker-a ./cmd/worker-a/main.go"
+  bin = "./tmp/worker-a"
+  cmd = "go mod tidy && go mod download && go build -o ./tmp/worker-a ./cmd/worker-a/worker.go"
   delay = 1000
   exclude_dir = ["assets", "tmp", "vendor", "testdata", "docs"]
   exclude_file = []
