@@ -1,7 +1,12 @@
 SWAG := swag
 MOCKERY := mockery
+APP_PATH := $(APP_DIR)/cmd/server/main.go
 
 
+# Generate swagger documentation
+docs:
+	@echo "📚 Generating swagger documentation"
+	@$(SWAG) init --parseDependency -g $(APP_PATH)
 # Generate test mocks
 mocks:
 	@echo "📚 Generating test mocks"
@@ -16,4 +21,4 @@ dev:
 	@air .
 
 
-.PHONY: dev dev-worker-a mocks
+.PHONY: dev dev-worker-a mocks docs

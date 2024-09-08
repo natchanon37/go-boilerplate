@@ -2,6 +2,8 @@ package httpserver
 
 import (
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files" // add by myself
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type defaultRouter interface {
@@ -44,6 +46,9 @@ func NewRouter(isDebug bool) *ginRouter {
 
 	// Add the custom middlewares
 	r.Use(CORSMiddleware())
+
+	// Add the swagger route
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	return &ginRouter{engine: r}
 }
