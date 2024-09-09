@@ -3,12 +3,16 @@ package main
 import (
 	"go-boilerplate/configs"
 	"go-boilerplate/internal/api/routes"
+	"go-boilerplate/internal/database"
+	database_mysql "go-boilerplate/internal/database/mysql"
 	"log"
 	"os"
 
 	_ "go-boilerplate/docs"
 	"go-boilerplate/pkg/httpserver"
 	"go-boilerplate/pkg/utils"
+
+	_ "ariga.io/atlas-provider-gorm/gormschema"
 )
 
 // @title           Go Boilerplate API
@@ -39,9 +43,19 @@ func main() {
 	// Load Configs
 	configs.LoadConfigs(&configs.Configs)
 
+	// mysql connection
+	var db database.Database             // common interface for all databases
+	mysqlDb := &database_mysql.MySqlDb{} // mysql database
+	if err := mysqlDb.Connect(configs.Configs.Database); err != nil {
+		panic("Failed to connect to database: " + err.Error())
+	}
+
+	db = mysqlDb
+	defer db.Close()
+
 	// Start server
 	router := httpserver.NewRouter(true)
-	routes.InitialServerRoutes(router, nil, nil)
+	routes.InitialServerRoutes(router, db.GetDB(), nil)
 	host := configs.Configs.Server.Host
 	port := utils.StringToInt(configs.Configs.Server.Port)
 	server := httpserver.NewRestAPI(host, port, router)

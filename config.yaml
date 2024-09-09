@@ -2,6 +2,20 @@ server:
   host: 127.0.0.1
   port: "9005"
 
+database:
+  read:
+    host: 127.0.0.1
+    port: "5506"
+    user: "root"
+    pass: "111"
+    name: "mydb"
+  write:
+      host: 127.0.0.1
+      port: "4406"
+      user: "root"
+      pass: "111"
+      name: "mydb"
+
 worker_a_consumer:
   host: "localhost:9092,localhost:9093,localhost:9094"
   user: "user"

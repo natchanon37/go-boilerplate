@@ -13,6 +13,20 @@ type Config struct {
 	Server          ServerConfig
 	WorkerAConsumer WorkerAConsumerCfg `mapstructure:"worker_a_consumer"`
 	Producer        ProducerCfg
+	Database        Database
+}
+
+type Database struct {
+	Write DatabaseConfig
+	Read  DatabaseConfig
+}
+
+type DatabaseConfig struct {
+	Host string
+	Port string
+	User string
+	Pass string
+	Name string
 }
 
 type ServerConfig struct {
