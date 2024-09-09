@@ -5,8 +5,8 @@ import (
 )
 
 type Transaction struct {
-	TransactionID uint    `gorm:"primary_key" json:"transaction_id"`
-	CustomerID    uint    `gorm:"type:uint" json:"customer_id"`
-	Amount        float64 `gorm:"type:decimal(10,2)" json:"amount"`
+	CustomerId    string `gorm:"primaryKey" json:"-"`
+	TransactionId string `gorm:"type:varchar(64);primaryKey" json:"transaction_id"`
+	Amount        string `gorm:"type:varchar(64)" json:"amount"`
 	common.Timestamp
 }

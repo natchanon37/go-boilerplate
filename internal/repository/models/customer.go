@@ -5,8 +5,8 @@ import (
 )
 
 type Customer struct {
-	ID           uint          `gorm:"primary_key" json:"id"`
+	CustomerId   string        `gorm:"type:varchar(64);primaryKey" json:"customer_id"`
 	Name         string        `gorm:"type:varchar(255)" json:"name"`
-	Transactions []Transaction `gorm:"foreignKey:CustomerID;references:ID" json:"transactions"`
+	Transactions []Transaction `gorm:"foreignKey:CustomerId" json:"transactions"`
 	common.Timestamp
 }
