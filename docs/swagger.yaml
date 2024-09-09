@@ -1,4 +1,25 @@
 definitions:
+  controller_response.CreateCustomerResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+  controller_response.GetCustomerResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/go-boilerplate_internal_services.GetCustomerData'
+      message:
+        type: string
+      status:
+        type: string
+    type: object
   controller_response.HealthResponse:
     properties:
       code:
@@ -7,6 +28,22 @@ definitions:
       message:
         type: string
       status:
+        type: string
+    type: object
+  go-boilerplate_internal_services.CreateCustomerReq:
+    properties:
+      amount:
+        type: number
+      customer_name:
+        type: string
+      tx_id:
+        type: string
+    type: object
+  go-boilerplate_internal_services.GetCustomerData:
+    properties:
+      amount:
+        type: number
+      tx_id:
         type: string
     type: object
 externalDocs:
@@ -41,6 +78,49 @@ paths:
       summary: system health check
       tags:
       - system
+  /v1/customer/{cus_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get Customer Data
+      parameters:
+      - description: customer id
+        in: path
+        name: cus_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller_response.GetCustomerResponse'
+      summary: Get Customer Data
+      tags:
+      - customer
+  /v1/customer/create-customer:
+    post:
+      consumes:
+      - application/json
+      description: Create Customer
+      parameters:
+      - description: Create Customer Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/go-boilerplate_internal_services.CreateCustomerReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller_response.CreateCustomerResponse'
+      summary: Create Customer
+      tags:
+      - customer
 securityDefinitions:
   BasicAuth:
     type: basic

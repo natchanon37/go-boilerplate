@@ -46,9 +46,107 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/v1/customer/create-customer": {
+            "post": {
+                "description": "Create Customer",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "customer"
+                ],
+                "summary": "Create Customer",
+                "parameters": [
+                    {
+                        "description": "Create Customer Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/go-boilerplate_internal_services.CreateCustomerReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller_response.CreateCustomerResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/customer/{cus_id}": {
+            "get": {
+                "description": "Get Customer Data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "customer"
+                ],
+                "summary": "Get Customer Data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "customer id",
+                        "name": "cus_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller_response.GetCustomerResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "controller_response.CreateCustomerResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "controller_response.GetCustomerResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/go-boilerplate_internal_services.GetCustomerData"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
         "controller_response.HealthResponse": {
             "type": "object",
             "properties": {
@@ -60,6 +158,31 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "go-boilerplate_internal_services.CreateCustomerReq": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "customer_name": {
+                    "type": "string"
+                },
+                "tx_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "go-boilerplate_internal_services.GetCustomerData": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "tx_id": {
                     "type": "string"
                 }
             }
